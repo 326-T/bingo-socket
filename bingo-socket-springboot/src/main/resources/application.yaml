@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/bingo
+    username: sa
+    password: password
+    initialization-mode: always
+    sql-script-encoding: utf-8
+
+  session:
+    store-type: none
+
+management:
+  health:
+    redis:
+      enabled: false
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
