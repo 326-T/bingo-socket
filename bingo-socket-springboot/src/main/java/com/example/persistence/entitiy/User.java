@@ -1,9 +1,6 @@
 package com.example.persistence.entitiy;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 
@@ -11,6 +8,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Data
 @Builder
+@ToString
 public class User {
     private Integer id;
     private String name;

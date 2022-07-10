@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import "./App.css";
+import { CookiesProvider } from "react-cookie";
+
+// pages
+import HomePage from "./components/pages/HomePage"
+import SignInPage from "./components/pages/SignInPage"
+// common
+import {PrivateRoute} from "./common/PrivateRoute";
+import {AuthProvider} from "./context/AuthProvider";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <CookiesProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/sign-in" element={<SignInPage/>}/>
+            <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>}/>
+          </Routes>
+        </AuthProvider>
+      </CookiesProvider>
+    </BrowserRouter>
   );
 }
 

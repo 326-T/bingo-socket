@@ -20,14 +20,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/current_user")
+    @GetMapping("/current-user")
     public UserResponse currentUser(HttpServletRequest request) {
         User user = AuthorizationUtil.getUser(request);
         return UserResponse.builder().id(user.getId()).name(user.getName()).email(user.getEmail()).token(user.getToken()).build();
     }
 
     @NonAuth
-    @PostMapping("/login")
+    @PostMapping("/sign-in")
     public UserResponse login(@RequestBody UserRequest userRequest) throws UnauthorizedException {
         User user = userService.login(userRequest.exportEntity());
         return UserResponse.builder().id(user.getId()).name(user.getName()).email(user.getEmail()).token(user.getToken()).build();
