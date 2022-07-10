@@ -57,7 +57,7 @@ export default function SignIn() {
         authenticated: true,
         user: res.data,
       })
-      setCookie("token", res.data.token);
+      setCookie("token", res.data.token, { path: '/' });
       navigate("/");
     });
   };

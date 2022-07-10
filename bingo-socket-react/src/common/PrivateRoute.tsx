@@ -27,9 +27,12 @@ export const PrivateRoute: React.FC<AuthProps> = ({ children }) => {
   const loadPath = () => {
     var savedPath = cookies.path;
     var savedQuery = cookies.query;
-    if(!savedPath) savedPath = "/";
-    if(!savedQuery) savedQuery = "";
-    return queryString.stringifyUrl({url: savedPath, query: savedQuery});
+    if(savedPath && savedQuery) {
+      removeCookie("path", savedPath);
+      removeCookie("query", savedQuery);
+      return queryString.stringifyUrl({url: savedPath, query: savedQuery});
+    }
+    return queryString.stringifyUrl({url: path, query: query});
   }
 
   const fetchCurrentUser = useCallback(async () => {
@@ -67,6 +70,6 @@ export const PrivateRoute: React.FC<AuthProps> = ({ children }) => {
   return (
     loading ? <></> :
       authState.authenticated ? (<>{children}</>) :
-      (<Navigate to={'sign-in'}/>)
+      (<Navigate to={'/sign-in'}/>)
   )
 }
