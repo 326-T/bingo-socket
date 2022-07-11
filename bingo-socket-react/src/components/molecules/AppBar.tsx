@@ -9,6 +9,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 // common
 import { DrawerContext } from "../../context/DrawerProvider";
+// molecules
+import AccountMenu from "./AccountMenu";
 
 const drawerWidth: number = 240;
 
@@ -72,6 +74,11 @@ export const AppBar: React.FC = () => {
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
             <NotificationsIcon/>
+          </Badge>
+        </IconButton>
+        <IconButton color="inherit">
+          <Badge color="secondary">
+            <AccountMenu/>
           </Badge>
         </IconButton>
       </Toolbar>

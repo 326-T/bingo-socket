@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import axios from "axios";
-import React, { useState, useContext, createContext, useCallback, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
 
@@ -35,8 +35,8 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const {authState, setAuthState} = useContext(AuthContext);
+export default function SignUp() {
+  const [authState, setAuthState] = useState(useContext(AuthContext).authState);
   const [cookies, setCookie] = useCookies();
   const navigate = useNavigate();
 
@@ -44,11 +44,13 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      name: data.get('name'),
       email: data.get('email'),
       password: data.get('password'),
     });
     await axios
-    .post(`/api/v1/auth/sign-in`, {
+    .put(`/api/v1/auth/sign-up`, {
+      name: data.get('name'),
       email: data.get('email'),
       password: data.get('password')
     })
@@ -78,9 +80,19 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign Up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+            />
             <TextField
               margin="normal"
               required
@@ -111,20 +123,8 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Sign Up
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/sign-up" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

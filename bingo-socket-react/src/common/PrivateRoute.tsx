@@ -13,7 +13,7 @@ type AuthProps = {
 
 export const PrivateRoute: React.FC<AuthProps> = ({ children }) => {
   const [cookies, setCookie, removeCookie] = useCookies();
-  const [authState, setAuthState] = useState(useContext(AuthContext).authState);
+  const {authState, setAuthState} = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const path = useLocation().pathname;

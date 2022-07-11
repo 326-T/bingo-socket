@@ -5,6 +5,7 @@ import { CookiesProvider } from "react-cookie";
 // pages
 import HomePage from "./components/pages/HomePage";
 import SignInPage from "./components/pages/SignInPage";
+import SignUpPage from "./components/pages/SignUpPage";
 // templates
 import DashBoardLayout from "./components/templates/DashBoardLayout";
 // common
@@ -20,6 +21,7 @@ function App() {
           <DrawerProvider>
             <Routes>
               <Route path="/sign-in" element={<SignInPage/>}/>
+              <Route path="/sign-up" element={<SignUpPage/>}/>
               <Route path="/" element={<PrivateRoute><HomePage/></PrivateRoute>}/>
               <Route path="/dash-board" element={<PrivateRoute><DashBoardLayout/></PrivateRoute>}/>
             </Routes>
